@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { DEFAULT_IMAGE, PATTERNS, validateOgpSearch } from "#/lib/ogp";
 
 export const Route = createFileRoute("/")({
@@ -9,7 +8,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const search = Route.useSearch();
-  const [image, setImage] = useState(search.image ?? "");
+  const navigate = useNavigate({ from: "/" });
+  const image = search.image ?? "";
 
   const qs = image ? `?image=${encodeURIComponent(image)}` : "";
 
@@ -30,7 +30,9 @@ function Home() {
           type="url"
           placeholder={DEFAULT_IMAGE}
           value={image}
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(e) =>
+            navigate({ search: { image: e.target.value || undefined }, replace: true })
+          }
           className="mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
         />
         <p className="mt-1 text-xs text-neutral-500">
@@ -49,7 +51,7 @@ function Home() {
               <Link
                 to={`/${p.slug}` as "/both"}
                 search={image ? { image } : undefined}
-                className="font-medium text-blue-600 hover:underline"
+                className="break-all font-medium text-blue-600 hover:underline"
               >
                 /{p.slug}
                 {qs}
