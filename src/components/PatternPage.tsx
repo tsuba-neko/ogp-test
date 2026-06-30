@@ -27,28 +27,6 @@ export function PatternPage({ pattern }: { pattern: PatternSlug }) {
           className="mt-3 max-h-80 w-full rounded-md border border-neutral-200 object-cover"
         />
       </section>
-
-      <section className="mt-6 rounded-lg bg-neutral-50 p-4 text-sm">
-        <h2 className="font-semibold">How to test</h2>
-        <ol className="mt-2 list-decimal space-y-1 pl-5 text-neutral-700">
-          <li>Deploy this app and open the canonical URL on the public origin.</li>
-          <li>
-            Paste it into{" "}
-            <a
-              className="text-blue-600 hover:underline"
-              href="https://cards-dev.twitter.com/validator"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Twitter Card Validator
-            </a>{" "}
-            or post the link in a draft on X to preview.
-          </li>
-          <li>
-            Override via querystring: <code className="rounded bg-white px-1">?image=...</code>
-          </li>
-        </ol>
-      </section>
     </main>
   );
 }
