@@ -162,49 +162,6 @@ pnpm deploy
 
 ---
 
-## 現在の状態（セッション引き継ぎ向け）
-
-### 完了済み
-
-- TanStack Start プロジェクトのスキャフォールド（Cloudflare deploy 設定込み）
-- 5パターン分のルート実装と SSR meta タグ出力の検証（`curl` 確認済み）
-- インデックスページの実装
-- Biome 導入（ESLint+Prettier 完全置き換え、lint/format クリーン）
-- pnpm 化（`pnpm-lock.yaml` 生成、`packageManager` フィールド固定）
-- `pnpm build` がCloudflare Workers 用バンドルを正常生成することを確認
-
-### 未完了 / TODO
-
-- [ ] **Git 初回コミットができていない**。`git init` は済み、27ファイル `git add` 済みだが、commit 実行時にバックグラウンド側のexit code 0だったにもかかわらず`git log`に何も残っていない状態。pre-commitフックか、Claudeの安全機構による何らかのブロックが原因の可能性。次セッションでまず `git status` → `git commit -m "..."` を手動で実行し、状況確認したい。
-- [ ] **GitHubリポジトリ未作成・未push**。プッシュ先は `github.com/tsuba-neko`（個人アカウント）、visibility は **Private** で確定済み。コミット完了次第 `gh repo create tsuba-neko/ogp-test --private --source . --remote origin --push` などで一気にいける想定。
-- [ ] **Cloudflareデプロイ未実施**。`wrangler login` も未。実機の本番URLをまだ取れていない。
-- [ ] **X での実機検証未実施**。これが最終ゴール。
-- [ ] **`og:url` が相対パス**。絶対URLにしたい（リクエストのhostヘッダから組み立てる対応が必要）。
-- [ ] **テストコードがない**。Vitest 環境はあるが `*.test.ts` ファイル未作成。`buildMeta` の各パターンが期待通りの配列を返すユニットテストを書くと安心。
-- [ ] **README に書いた仕様変更時の追従**。`PATTERNS` 配列を増やしたらこの README の「5つのパターン」表も更新する。
-
-### 過去セッションで決定した方針（覚書）
-
-- デプロイ先 = **Cloudflare Pages/Workers**
-- クエリ仕様 = `?image=<URL>` をシンプルに採用（`title`/`description` は将来オプションで）
-- ルート構成 = 静的に5ルート（`/pattern/[id]` のような動的ルートにはしない）
-- Twitter `summary` カードの画像 = `?image=` をそのまま流用
-- Biome のスタイル = double quote / 2-space / semicolons / trailingComma all
-- パッケージマネージャ = pnpm（`packageManager` フィールドで固定）
-- GitHubアカウント = `github.com/tsuba-neko` / Private repo
-
-### 次セッション開始時の推奨アクション
-
-1. `git status` で staged 状態の確認
-2. `git log --oneline -5` で commit 有無の確認
-3. なければ `git commit -m "Initial commit: ..."` を実行
-4. `gh auth status` で github.com アカウントが active なことを確認
-5. `gh repo create tsuba-neko/ogp-test --private --source . --remote origin --push` でリポジトリ作成 + push
-6. `pnpm dlx wrangler login` → `pnpm deploy` で Cloudflare へ
-7. デプロイ後のURLを X に貼って各パターンの見え方を比較
-
----
-
 ## 参考
 
 - TanStack Start: https://tanstack.com/start
