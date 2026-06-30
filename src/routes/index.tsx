@@ -60,20 +60,6 @@ function Home() {
           ))}
         </ul>
       </section>
-
-      <section className="mt-8 rounded-lg bg-neutral-50 p-4 text-sm">
-        <h2 className="font-semibold">Workflow</h2>
-        <ol className="mt-2 list-decimal space-y-1 pl-5 text-neutral-700">
-          <li>このアプリを Cloudflare にデプロイ。</li>
-          <li>
-            <code className="rounded bg-white px-1">
-              https://&lt;your-host&gt;/both?image=https://...
-            </code>{" "}
-            のような URL を作る。
-          </li>
-          <li>X (Twitter) で投稿欄に貼ってプレビューを確認。</li>
-        </ol>
-      </section>
     </main>
   );
 }
